@@ -8,7 +8,7 @@
 	<property name="final.jar"		  value="${jars.dir}/${progjar.name}"/>
     <property name="commons.dir"  	  value="../lib/apache_commons" />
     <property name="commons.jar"  	  value="commons-lang3-3.1.jar" />
-    <property name="javatuples.dir"   value=".,/lib/javatuples/lib"/>
+    <property name="javatuples.dir"   value="../lib/javatuples/lib"/>
     <property name="javatuples.jar"   value="javatuples-1.2.jar"/>
 
     <property name="main.class"       value="uk.ac.mdx.RBornat.Saeedgenerator.Generator"/>
