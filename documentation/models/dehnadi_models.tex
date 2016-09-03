@@ -1,0 +1,173 @@
+%!TEX TS-program = pdflatexmk
+\documentclass[11pt,a4paper]{article}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{subfigure}
+\usepackage[round]{natbib}
+\usepackage[pagebackref]{hyperref}
+\usepackage{color}
+\usepackage{mdwlist}
+
+\hoffset = 0mm
+\voffset = 0mm
+\textwidth = 165mm
+\textheight = 229mm
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 3pt
+\parindent = 0.0in
+
+\makeatletter
+\renewcommand{\@makefntext}[1]{\setlength{\parindent}{0pt}%
+\begin{list}{}{\setlength{\labelwidth}{1em}%
+  \setlength{\leftmargin}{\labelwidth}%
+  \setlength{\labelsep}{3pt}\setlength{\itemsep}{0pt}%
+  \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}%
+  \footnotesize}\item[\hfill\@makefnmark]#1%
+\end{list}}
+\makeatother
+
+\newcommand{\greyorcolour}[2]{#2} % #1 highlighting (etc.) for greyscale, #2 for colour
+\input{rbmacros}
+\input{rblistings}
+
+\title{Dehnadi's assignment and sequence models}
+\author{Richard Bornat %\\ Computer Laboratory, University of Cambridge, Cambridge, UK \\ School of Electrical Engineering and Computer Science, Queen Mary, University of London, UK 
+\\ School of Science and Engineering, Middlesex University, London, UK \\ %rb501@cam.ac.uk, richard@eecs.qmul.ac.uk, 
+R.Bornat@mdx.ac.uk}
+
+\begin{document}
+\maketitle
+
+%\begin{abstract}
+%\noindent
+%
+%\end{abstract}
+
+Dehnadi's thesis~\citep{DehnadiThesis2009} described several experiments with a questionnaire given to programming novices before the beginning of their first programming course. Since then the same test has been applied to test the efficacy of a programming course~\citep{FordVenemaAssessingtheSuccessofanIntroductoryProgrammingCourse2010}. It can also be used diagnostically, during a programming course, to see whether they have grasped the first concepts of imperative programming, which he took to be assignment and sequence.
+
+The test attempts to measure the \emph{mental model} that a subject uses when solving a particular problem. The problem is ``what does this program do?''. The models that the test recognises are all \emph{algorithmic} -- the sort of models that a machine could use -- but they aren't all the same as the ones that, say, the Java virtual machine actually uses.
+
+\section{Assignment models}
+
+Simple Java assignments are written \begin{quote}
+\lstinline{<variable> = <expression>;}
+\end{quote}
+-- the use of an equals sign trips up many a novice, and few realise that (absurdly, in C and Java syntax) the semicolon is actually part of the assignment. The mental model we would like our students to have when they are asked ``what does \lstinline{x=3;} do?'' is something like ``it puts 3 into the variable called x''. For the slightly more complicated ``what does \lstinline{x=y;} do?'' we hope they will say ``it looks at the value in y and puts a copy in x''. Of course there are many ways of answering those questions, but every correct answer will describe some sort of mechanism, which will copy a value from right to left. 
+
+Not every student uses the same mental model when answering such questions. Dehnadi identified nine models which are commonly used, plus two which don't have to do with assignment. First of all there are eight variations on the assignment theme, constructed from three independent binary choices:
+\begin{itemize*}
+\item replace / add
+\item copy / move;
+\item left to right / right to left;
+\end{itemize*}
+The replace / add choice distinguishes overwriting (as in Java, where \lstinline{x=y;} overwrites the value in x) from accumulating (where \lstinline{x=y;} adds to the value in x). Copy / move distinguishes copying (as in Java, where \lstinline{x=y;} uses a copy of the value in y) from moving (where \lstinline{x=y;} takes the value out of y, leaving zero behind). The direction choices are obvious: a novice might think that \lstinline{x=y;} affects y (left to right) or x (right to left). 
+
+Those three choices give us eight models ($2 \times 2 \times 2$), and in addition there is swap, if we are thinking of assignments like \lstinline{x=y;}.
+
+On top of these nine mechanical models -- all of which are seen in novices -- Dehnadi recognised that some people might answer his test as if assignments do nothing at all, and others as if they were statements of equality. In the latter case, for example, if x=3 and y=4 (note that this is an algebraic equality, not a Java assignment mechanism), a novice asked what \lstinline{x=y;} does might say that it either leaves x=y=4 or x=y=3. That behaviour is ocasionally seen in complete novices.
+
+\begin{table}
+\caption{Dehnadi's assignment models}
+\centering
+\begin{tabular}{|l|l|l|l|}
+\multicolumn{1}{l}{\vstrut{15pt}Model} & \multicolumn{1}{l}{direction} & \multicolumn{1}{l}{source} & \multicolumn{1}{l}{destination} \\
+\hline
+M1 & right to left & move & replace \\
+\hline
+M2 & right to left & copy & replace \\
+\hline
+M3 & left to right & move & replace \\
+\hline
+M4 & left to right & copy & replace \\
+\hline
+M5 & right to left & copy & add \\
+\hline
+M6 & right to left & move & add \\
+\hline
+M7 & left to right & copy & add \\
+\hline
+M8 & left to right & move & add \\
+\hline
+M9 & \multicolumn{3}{l|}{no change} \\
+\hline
+M10 & \multicolumn{3}{l|}{equality} \\
+\hline
+M11 & \multicolumn{3}{l|}{swap} \\
+\hline
+\end{tabular}
+\tablabel{assignmentmodels}
+\end{table}
+Dehnadi gave his models numbers, shown in \tabref{assignmentmodels}.
+
+\section{Sequence models}
+
+If we write two assignments one after the other, as for example 
+\begin{quote}
+\lstinline{x=y;} \lstinline{z:=x;}
+\end{quote}
+(don't forget that the semicolons are part of the assignments!) then we can ask ``what does this program do?''. We would expect a subject with a firm grasp of one of the models from \tabref{assignmentmodels} -- and, remarkably, we find that at least 50\% of novices do have such a firm grasp -- to give an answer which somehow combines the effect of \lstinline{x=y;} and \lstinline{z:=x;}, and so they do.
+
+\begin{table}
+\caption{Dehnadi's sequence models for assignment 1 followed by assignment 2}
+\centering
+\begin{tabular}{|l|l|}
+\multicolumn{1}{l}{\vstrut{15pt}Model} & \multicolumn{1}{l}{description} \\
+\hline
+S1 & \begin{minipage}{350pt}
+\vstrut{10pt}sequential, single answer: assignment 1 makes a new state; give the effect of assignment 2 on that state.\vspace{5pt}
+\end{minipage} \\
+\hline
+S2 & \begin{minipage}{350pt}
+\vstrut{10pt}in parallel, multiple independent answers: give the effect of assignment 1 as one answer, and the effect of assignment 2 as another.\vspace{5pt}
+\end{minipage} \\
+\hline
+S3 & \begin{minipage}{350pt}
+\vstrut{10pt}parallel, single answer: give the effect of assignment 1 on its destination, and the effect of assignment 2 on its destination, ignoring any effects on their sources.\vspace{5pt}
+\end{minipage} \\
+\hline
+\end{tabular}
+\tablabel{sequencemodels}
+\end{table}
+One combination is sequential, Java style. Dehnadi labelled this as model S1 in \tabref{sequencemodels}: you take the effect of \lstinline{x=y;} and then you use that effect -- which might have altered x or y or both -- when considering \lstinline{z:=x;}. S1 is fairly common in novices, even when they haven't seen any programs.
+
+The other two combinations that Dehnadi recognised involve parallel execution of the two assignments. In one model -- S2 in \tabref{sequencemodels} -- a novice will give the separate effects of the two assignments, i.e. two alternative answers. S3 gives a single answer, but lists only the effects on the \emph{destinations} of the assignments: say the effect of \lstinline{x=y;} on x and the effect of \lstinline{z:=x;} on z, if assignment goes right to left, but ignoring any effects on y from the first assignment or x from the second, even if their assignment model does `move' rather than `copy'. S2 is common in complete novices, S3 is common once they've started to learn about assignment and sequence.
+
+\section{Algorithmic or not?}
+
+In Dehnadi's thesis work he found a way of discovering which assignment and sequence models a novice was using. He asked twelve questions, some with one assignment, some with two, some with three, and he looked at their answers overall, searching for models that would explain as many as possible of their answers. That is, he gave them the benefit of the doubt. Remarkably, this works: you can, in fact, discover the way that the test subjects are thinking about the questions if they are using a Dehnadi assignment model and a Dehnadi sequence model. Equally remarkably, we haven't yet come across any new models (but we are always hopeful that we will one day find some.)
+
+Dehnadi divided his subjects' responses into three groups: Algorithmic (he said consistent), Unrecognised (he said inconsistent) and Blank. You were Algorithmic if in  eight or more questions (out of twelve) you seemed to use the same model; you were Blank if you didn't answer at least eight questions; and Unrecognised otherwise. He also gave Algorithmic to responses which used the same model in each of the first six questions, all the single and double-assignment problems. Remarkably again, he got very few Blanks and in complete novices at least 50\% Algorithmic (but not necessarily Java-Algorithmic, of course). 
+
+We've adapted his test to use online, and we mark the results automatically. Automatic marking lets us be more rigorous: Dehnadi recorded Algorithmic if you used the same \emph{assignment} model eight times, or in the first six questions; the online test requires the same \emph{assignment and sequence} models, and it gives Possibly-algorithmic to those who switch sequence models. The distinction is useful. 
+
+Automatic marking also allows us to be more generous: we mark them Algorithmic if they use the same model in seven of the nine multi-assignment questions (there seem to be some who do that); we search for people who seem to have changed models mid-test (and we do see a few of those) as well as people who are hedging their bets, giving alternative answers corresponding to alternative models (we see very very few of these, and we're not sure that the marking algorithm can reliably identify them).
+
+\section{How to give feedback to students}
+
+Each automatically-marked response generates a line in a spreadsheet, which gives their administrative answers (like name and student number) plus any survey-type questions we ask (e.g. which is the most difficult topic in this year's course) and then a rating (Algorithmic, etc.), a reason for the rating (like ``M11(Swap)+S3(ParallelDestinationOnly)=10'', which means they used assignment model M11 and sequence model S3 in ten questions), then all their answers, then the ticks they made, then some timing stuff (which we don't know what to do with yet). 
+
+You should look at the rating and the reason and discuss the answers with the subject. You should also have a paper copy of the test to form the basis of discussion. The discussion might take the form
+\begin{quote}
+``The machine thinks you have misunderstood some of these questions. In question 1 you ticked a=10, b=20. Can you tell me why you chose that answer?''
+\end{quote}
+-- and then fight your way through ``I dunno'' in the normal way. Good luck.
+
+\section{Going further}
+
+Dehnadi's work showed that something odd is going on at the beginning of a programming course. Mid-course and post-course testing, looking not just for Algorithmic behaviour but use of the correct models, shows that he was on to something. The best explanation we have~\citep{RobinsLearningedgemomentum2010} is that there is a \emph{cognitive obstacle} lurking behind the simple-seeming ideas of assignment and sequence, and that people who don't get over that obstacle can't get over subsequent ones and then either fail the course or scrape through whilst not able to program. 
+
+Java probably makes the obstacle worse (that's my prejudice) but whatever language you teach, there's an obstacle right at the start. In functional programming it seems to be parameter substitution. 
+
+And there are obstacles later on. You will have perhaps encountered students who can deal with everything up to loops but are floundering with nested loops or loop termination or parameterisation or whatever. We want to work on that too (and, again, on similar obstacles in functional programming: there's no free lunch there).
+
+
+\bibliographystyle{plainnat}
+\bibliography{bornat} 
+
+\end{document}

@@ -1,0 +1,656 @@
+%!TEX TS-program = pdflatexmk
+\documentclass[11pt,a4paper]{article}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{subfigure}
+\usepackage[round]{natbib}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+\hoffset = 0mm
+\voffset = 0mm
+\textwidth = 165mm
+\textheight = 229mm
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 3pt
+\parindent = 0.0in
+
+\makeatletter
+\renewcommand{\@makefntext}[1]{\setlength{\parindent}{0pt}%
+\begin{list}{}{\setlength{\labelwidth}{1em}%
+  \setlength{\leftmargin}{\labelwidth}%
+  \setlength{\labelsep}{3pt}\setlength{\itemsep}{0pt}%
+  \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}%
+  \footnotesize}\item[\hfill\@makefnmark]#1%
+\end{list}}
+\makeatother
+
+\usepackage{mdwlist}
+%\usepackage{textcomp}
+
+%\newcommand{\greyorcolour}[2]{#2} % #1 highlighting (etc.) for greyscale, #2 for colour
+%\input{rbmacros}
+
+\title{Generating, administering and marking Dehnadi-style tests}
+\author{Richard Bornat, Saeed Dehnadi \\ School of Science and Technology, Middlesex University, London, UK \\R.Bornat@mdx.ac.uk, S.Dehnadi@mdx.ac.uk}
+
+%\usepackage{titlesec}
+%\usepackage{etoolbox}
+%\setcounter{secnumdepth}{5}
+%\renewcommand\thesection{\arabic{section}}
+%
+%% this length controls tha hanging indent for titles
+%% change the value according to your needs
+%\newlength\titleindent
+%\setlength\titleindent{1cm}
+%
+%\pretocmd{\rbparagraph}{\stepcounter{subsection}}{}{}
+%\pretocmd{\rbsubparagraph}{\stepcounter{subsubsection}}{}{}
+%
+%\titleformat{\chapter}[block]
+%  {\normalfont\huge\bfseries}{}{0pt}{\hspace*{-\titleindent}}
+%
+%\titleformat{\section}
+%  {\normalfont\Large\bfseries}{\llap{\parbox{\titleindent}{\thesection\hfill}}}{0em}{}
+%
+%\titleformat{\subsection}
+%  {\normalfont\large}{\llap{\parbox{\titleindent}{\thesubsection\hfill}}}{0em}{\bfseries}
+%
+%\titleformat{\subsubsection}
+%  {\normalfont\normalsize}{\llap{\parbox{\titleindent}{\thesubsubsection}}}{0em}{\bfseries}
+%
+%\titleformat{\rbparagraph}[runin]
+%  {\normalfont\large}{\llap{\parbox{\titleindent}{\thesubsection\hfill}}}{0em}{}
+%
+%\titleformat{\rbsubparagraph}[runin]
+%  {\normalfont\normalsize}{\llap{\parbox{\titleindent}{\thesubsubsection\hfill}}}{0em}{}
+%
+%\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+%\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%\titlespacing*{\rbparagraph}{0pt}{3.25ex plus 1ex minus .2ex}{0em}
+%\titlespacing*{\rbsubparagraph}{0pt}{3.25ex plus 1ex minus .2ex}{0em}
+%
+%\renewcommand{\theparagraph}{\thesubsection}
+%\renewcommand{\thesubparagraph}{\thesubsubsection}
+%
+%\newcommand{\paralabel}[1]{\label{para:#1}}
+%\newcommand{\pararef}[1]{para \ref{para:#1}}
+
+\newcommand{\rbparagraph}{}
+\newcommand{\rbsubparagraph}{}
+\newcommand{\phr}[1]{$\langle$\emph{#1}$\rangle$}
+
+\newcommand{\seclabel}[1]{\label{sec:#1}}
+\newcommand{\secref}[1]{section \ref{sec:#1}}
+\newcommand{\tablabel}[1]{\label{tab:#1}}
+\newcommand{\tabref}[1]{section \ref{tab:#1}}
+\newcommand{\appxref}[1]{appendix \ref{sec:#1}}
+
+\newcommand{\vstrut}[1]{\rule{0pt}{#1}}
+
+\begin{document}
+\maketitle
+
+%\begin{abstract}
+%\noindent
+%
+%\end{abstract}
+
+We have automated the business of generating a questionnaire which includes the questions of Dehnadi's test, and other similar tests. We have also automated the analysis of responses to the test. This document describes and explains what you have to do to use the tests and our generation / analysis tool.
+
+To help people who have used Saeed's original test, from his website, we've modified the analysis software to be able to deal with that test. \emph{Please don't use that original test in experiments: it has some mistakes in questions and answer sheet.}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{How to get the tests, the tool, and our papers}
+
+All that you need (including this manual) is available from \href{http://www.eis.mdx.ac.uk/staffpages/r_bornat/tests/distribution.html}{our distribution page} at Middlesex University. 
+
+Some of our papers are available from \href{http://www.eis.mdx.ac.uk/research/PhDArea/saeed/}{Saeed Dehnadi's page}; the latest is \href{http://www.ppig.org/papers/24/8.Observing_mental_models-Richard\%20Bornat.pdf}{available from PPIG}.
+
+If you want to administer our paper test, download it from \href{http://www.eis.mdx.ac.uk/staffpages/r_bornat/tests/distribution.html#papertest}{here} and follow the instructions in \secref{runningPaper} and \secref{markingPaper}. 
+
+If you want to generate a questionnaire, or analyse the responses to a questionnaire, download our generation / analysis program and the files it needs from \href{http://www.eis.mdx.ac.uk/staffpages/r_bornat/tests/distribution.html}{our distribution page}.
+
+If you want to see what an online test looks like, see \href{http://www.eis.mdx.ac.uk/research/mmlp/limesurvey/index.php/survey/index/sid/469385/newtest/Y/lang/en}{our sample questionnaire}. 
+
+If you're in a school or university we may be able to host an online test for you: contact \href{mailto:R.Bornat@mdx.ac.uk}{Richard Bornat}.
+
+If you want to understand the analyser's judgements or the models of assignment and sequence that we use, see \secref{interpreting}.
+
+\section{Basics}
+
+\subsection{Nomenclature: questionnaire, test, survey}
+
+When Saeed Dehnadi was carrying out his research, he talked of administering a `test' to his students, or sometimes a `questionnaire'. When we began to automate his work, we found that the software we wanted to use talked about `surveys'. We found also that it was natural to divide the questions that we asked our test participants into two kinds: 
+\begin{description*}
+\item[personal] questions about their background (e.g. what is your name? have you ever written a computer program?);
+\item[programming] questions about assignment and sequence (e.g. \texttt{int a=10; int b=20; a=b};\ what are the new values of a and b?) 
+\end{description*}
+
+In this document we have called the whole thing -- personal and programming questions together -- a \emph{questionnaire}, and the part of it that is about programming a \emph{test}, but LimeSurvey and SurveyMonkey will continue to call the questionnaire a `survey'.
+
+\subsection{Generating, administering and marking questionnaires}
+
+We have written a program which generates questionnaires as files that can be loaded into a survey tool -- LimeSurvey or SurveyMonkey -- or printed out and administered as a paper test. LimeSurvey and SurveyMonkey will administer the test and output a spreadsheet detailing all the responses; we distribute an empty spreadsheet with the paper version which you can fill in yourself from the questionnaire scripts. In each case our program can then analyse the responses in the spreadsheet.
+
+To use this manual you have to decide whether you are going to generate a questionnaire (\secref{generating}), administer a questionnaire (\secref{administering}), analyse the responses to a questionnaire (\secref{marking}) or understand the analysed responses (\secref{interpreting}). 
+
+\subsection{Running the generator/analyser program}
+\seclabel{running}
+\rbparagraph{}
+To generate or analyse a questionnaire you have to use our generator/analyser program. It is written in Java and distributed as an `executable jar' file called \texttt{DehnadiGenAn.jar}. Before you can use it you may need to install Java on your computer, if you don't have it already.
+
+On Windows or OS X, you double-click the \texttt{jar} file and it runs. On Linux don't double-click (it unpacks the file instead of running it): \texttt{java -jar DehnadiGenAn.jar} will run it properly.
+
+\section{Generating a questionnaire}
+\seclabel{generating}
+
+Start the program (\secref{running}). It asks you whether you want to generate a questionnaire (choose Generate), and then asks to open two files:
+\begin{itemize*}
+\item a questionnaire description file;
+\item a test description file.
+\end{itemize*}
+The questionnaire description file describes all the personal information and background questions; the test description file (separate because one test fits many different questionnaires) describes the programming questions.
+
+In case you want to generate your own questionnaire and/or test descriptions, see \appxref{descriptionformats}. But you will probably use one of the files we distribute, or we might produce a questionnaire description just for you. 
+
+In any case you will probably use a standard test description file. We distribute two:
+\begin{itemize*}
+\item Saeed's original test (\texttt{ClassicDehnadiTest.txt});
+\item a modified version of the original test (\texttt{NonRepeatingDehnadiTest.txt}).
+\end{itemize*}
+The original test is provided for historical reasons, but we have found a problem with it: many of the answers to the last six questions are shared, and a participant who repeatedly ticks the same answer will seem to be using the same models of assignment and sequence throughout, which could be misleading.\footnote{But it might not be. Those participants who we have informally interviewed after they have done this seem to know what they are doing, so we haven't lost faith in Saeed's original results.} So \textit{\textbf{we strongly recommend that you use the modified test}} from the file \texttt{NonRepeatingDehnadiTest.txt}.
+
+Once it has its questionnaire and test description files, the program will ask what kind of questionnaire you want to generate: the choice at present is between LimeSurvey, SurveyMonkey and Paper: see \secref{choosingquestionnairetype} if you aren't sure what kind to choose. Once you have chosen it will generate the questionnaire files, plus copies of the questionnaire description and test description, which will be needed when the responses are analysed. Each of the files it generates will have as part of its name a \emph{questionnaire id}, a pseudo-random sequence of eight characters which is unique to the questionnaire you generated. 
+
+\begin{itemize}
+\item A \emph{LimeSurvey} questionnaire is a single file called \texttt{questionnaire\_}$\langle$questionnaire id$\rangle$\texttt{.lss}, plus 
+\texttt{QD\_LimeSurvey\_}$\langle$questionnaire id$\rangle$\texttt{.txt} and \texttt{TD\_LimeSurvey\_}$\langle$questionnaire id$\rangle$\texttt{.txt}. Keep all three files. See \secref{runningLimeSurvey} for what to do with the \texttt{.lss} file, and \secref{markingLimeSurvey} for what to do with the \texttt{QD} and \texttt{TD} files.
+
+\item A \emph{SurveyMonkey} questionnaire is a single file called \texttt{questionnaire\_}$\langle$questionnaire id$\rangle$\texttt{.txt}, plus \texttt{QD\_SurveyMonkey\_}$\langle$questionnaire id$\rangle$\texttt{.txt} and \texttt{TD\_SurveyMonkey\_}$\langle$questionnaire id$\rangle$\texttt{.txt}. Keep all three files. See \secref{runningSurveyMonkey} for what to do with the questionnaire file, and \secref{markingSurveyMonkey} for what to do with the \texttt{QD} and \texttt{TD} files.
+
+\item A \emph{Paper} questionnaire is a pair of \LaTeX{} files called \texttt{questionnaire\_}$\langle$questionnaire id$\rangle$\texttt{.tex} and \texttt{answersheet\_}$\langle$questionnaire id$\rangle$\texttt{.tex}. Run these through \LaTeX{} to generate postscript or pdf or dvi or whatever printable format you prefer. You also get \texttt{QD\_Paper\_}$\langle$questionnaire id$\rangle$\texttt{.txt}, \texttt{TD\_Paper\_}$\langle$questionnaire id$\rangle$\texttt{.txt} and \texttt{responses\_}$\langle$questionnaire id$\rangle$\texttt{.csv}: keep all three files, and see \secref{markingPaper} for what to do with them.
+\end{itemize}
+
+\subsection{What kind of questionnaire?}
+\seclabel{choosingquestionnairetype}
+
+There are advantages and disadvantages of each of the questionnaire types. 
+
+\subsubsection{Can you afford to use SurveyMonkey?}
+\seclabel{surveymonkeycosts}
+
+The bald fact is that \textbf{\textit{you must pay for a SurveyMonkey account to make it useful}}. The free (Basic) account will only take ten questions (Saeed's test has twelve, and you will need more to gather at least the names of your participants) and, crucially, it won't allow you to download the responses for analysis. 
+
+\subsubsection{Could you use LimeSurvey?}
+\seclabel{LimeSurveycosts}
+
+LimeSurvey is geeky to setup, and there are some security issues (get techie assistance), but it's free. We have a LimeSurvey setup at Middlesex, and if you are in a school or university, we may be able to host your survey: contact us.
+
+\subsubsection{Could you use paper?}
+\seclabel{papercosts}
+
+A paper survey is free, once you've printed enough questionnaires, though it's tedious transferring all the responses to a spreadsheet. Once you've done that we've automated the process: see \secref{markingPaper}.
+
+\section{Activating an online questionnaire}
+
+At present you have to use LimeSurvey (free, see \secref{LimeSurveycosts}) or SurveyMonkey (paid, because the free Basic account is too basic -- see \secref{surveymonkeycosts}).
+
+\subsection{Activating a LimeSurvey questionnaire}
+\seclabel{runningLimeSurvey}
+
+Login to your LimeSurvey website, press the big green `+' sign that lets you import or create a new survey, and point it at the \texttt{.lss} file you generated (\secref{generating}). It should load without incident. You may like to `integrity check' it (inside the pencil, called 'survey properties', there is a QA button, labelled `survey logic file').
+
+Test the survey with the green gearwheel icon.
+
+If you don't like the survey title, change it in `survey properties':`edit text elements'.
+
+Once you are happy with the survey, activate it by pressing the green triangle next to the red square. Activation is reversible (don't panic!). 
+
+If you want the activated survey to appear on the front page of the website, you can go to `survey properties':`general settings':`publication and access control' and check `list survey publicly'. At the same time you need to set a start date and an expiry date.
+
+Most of the other settings have been made at the time the \texttt{.lss} file was generated. If you find a useful one that wasn't set, please let us know.
+
+Give participants the link to your survey, or the link to the website front page if the survey is available from there.
+
+\subsection{Activating a SurveyMonkey questionnaire}
+\seclabel{runningSurveyMonkey}
+
+You will need a paid SurveyMonkey account: the free SurveyMonkey service won't deal with more than ten questions, and the test part alone of your questionnaire contains twelve questions.
+
+You \textbf{\textit{must paste the text}} from the \texttt{questionnaire\_}$\langle$questionnaire id$\rangle$\texttt{.txt} file into the SurveyMonkey website, because SurveyMonkey incorporates it into the spreadsheet of responses which it generates, and the automated analysis process recognises that text in order to be able to interpret the responses.
+
+At present SurveyMonkey can deal with all the question types (see \appxref{questiontypes}) that the questionnaire generator can process. Here is what you must do with the text from the \texttt{questionnaire\_}$\langle$questionnaire id$\rangle$\texttt{.txt} file. (\textbf{\textit{This section under development, because I'm finding it difficult to get to a paid SurveyMonkey account myself ...}})
+
+\begin{description}
+\item[**Text]: corresponds to SurveyMonkey `Single Textbox' with question text copied from the {.txt} file;
+\item[**Number]: corresponds to SurveyMonkey `Numerical Textboxes' with question text copied from the {.txt} file, and a single answer label of your choice;
+\item[**MultiText]: corresponds to SurveyMonkey `Multiple Textbox' with question text copied from the {.txt} file, and answer fields copied likewise;
+\item[**Choice]: corresponds to SurveyMonkey `Multiple Choice (only one Answer)' with question text copied from the {.txt} file, and answer fields copied likewise;
+\item[**MultiChoice]: corresponds to SurveyMonkey `Multiple Choice (Multiple Answers)' with question text copied from the {.txt} file, and answer fields copied likewise (but if there is an 'Other' field, you may want to allow text input for that);
+\item[**MultiText]: corresponds to SurveyMonkey 'Multiple Textboxes', with question text copied from the {.txt} file, and answer fields copied likewise
+\end{description}
+
+The programming questions are dealt with as 'Multiple Choice (Multiple Answers)'. Paste the question text (from `Read the following statements' up to `The new value of ...'). Paste the answers (a list of lines `a=.., b=.., ...') into the Answer Choices. Tick 'add Other', paste `any other values ...' into the Field Label. Don't require an answer. Click `Randomise, flip or sort choices' and choose `Randomize answer choices for each respondent'.
+
+\section{Gathering results}
+\seclabel{gathering}
+
+\subsection{Gathering results from LimeSurvey}
+
+\rbsubparagraph{}
+Login to the website, choose the survey from the dropdown list of surveys, choose the icon that looks like a speech bubble behind a pie chart, called `Responses'; within that choose `Responses and statistics'. The icon which looks like a cylinder with a solid green arrow, called `export results to application', leads you to the output page.
+
+\rbsubparagraph{}
+Choose the responses you want (range 1 to n, completion state). Under Headings click `Question code' (and don't click `convert spaces'); under Responses choose `answer codes' (and don't click `convert Y' or `convert N'); under Format click `CSV file'. Then press `Export data'.
+
+\rbsubparagraph{}
+It will produce a file called results-surveyNNNNN.csv, where NNNNN is the internal number (chosen by the website) of your survey. Your browser puts the file in the place where it puts downloads. 
+
+\subsection{Gathering results from SurveyMonkey}
+
+(\textbf{\textit{This section under development, because I'm finding it difficult to get to a paid SurveyMonkey account myself ...}})
+
+\subsection{Gathering results from a paper test}
+\seclabel{paperresults}
+
+\rbsubparagraph{}
+Paper tests were originally designed to be marked by hand, using Saeed's marking sheet. But that's tedious and error prone. If you must use a paper test, it can still be marked automatically. The \texttt{responses\_}$\langle$questionnaire id$\rangle$\texttt{.csv} file produced when the questionnaire was generated is a spreadsheet which contains headers that identify the tickboxes for each question, in the order they were placed on the question sheet. 
+
+\rbsubparagraph{}
+\textbf{\textit{Only use the responses spreadsheeet with the questionnaire for which it was generated: the tickboxes are randomly ordered, different every time a questionnaire is generated.}}
+
+\rbsubparagraph{}
+First load the \texttt{responses\_}$\langle$questionnaire id$\rangle$\texttt{.csv} file into a spreadsheet program. It will show you a spreadsheet with columns in which you can record the results of personal questions, as well as columns for the test questions. Don't delete any of the columns: the analyser looks at the column headers to make sure it is dealing with responses to the right questionnaire.
+
+\rbsubparagraph{}
+Each row shows a single participant's responses. Each question gets several columns: those labelled ``Q\textit{n}: $\langle$\textit{answer}$\rangle [\text{m}]$'' correspond to tickboxes from the questionnaire for question \textit{n}; those labelled ``Q\textit{n}: Other'' are for responses from the `any other values' slots for question \textit{n}. The tickboxes are listed in the order they appear in the printed questionnaire, so it's easy to put a mark (non-blank, something like Y or *) to correspond to each tick on the questionnaire script. In the `Other' column you can write the additional answers, if any, from the `any other values' answers: put commas between the parts of the answer (e.g. a=20, b=7), and semicolons between answers, if the participant has given more than one.
+
+Save the spreadsheet as a csv file -- don't let your spreadsheet program bully you into choosing a more specialised format.
+
+\section{Analysing the results}
+\seclabel{marking}
+\rbparagraph{}
+The process for marking a questionnaire is the same for all types. You run the generator/analyser program (\secref{running}); choose Mark rather than Generate; identify the responses file (a \texttt{csv} file produced as in \secref{gathering}), and the questionnaire description and test description used to generate the questionnaire -- i.e. the QD and TD files produced as in \secref{generating}. From the QD and TD filenames the program can see how you gathered the results, and analyse the responses accordingly.\footnote{If you lose those files then it is still possible to analyse the results, if you can identify the questionnaire and test descriptions that were used to generate the questionnaire. But it's not so easy, so please don't lose the files. And \textbf{\textit{definitely}} don't lose the responses file generated for a paper test.}
+
+If you don't give the program the right files it will complain, and in most cases it won't then be able to do its analysis. Contact Richard Bornat if you have difficulties.
+
+The program will output its analysis in a \texttt{csv} file that you can load into a spreadsheet program, and a diagnostic \texttt{txt} file giving an explanation of how it made its judgements. The \texttt{csv} file is probably more interesting to you: it is the same as the responses, with some additional columns called 'rating', 'reason', and Q1, Q2, etc. which show the answer given to each question and the model(s) which that answer matches in Dehnadi's interpretation. 
+
+\section{Understanding the analysis} 
+\seclabel{interpreting}
+
+There are three ways in which we know that a Dehnadi test can be used:
+\begin{enumerate}
+\item pre-course, to see how students view programming questions;
+\item during a course, to test student progress and see which of them need help;
+\item after a course, to test student achievement see what effect the teaching had.
+\end{enumerate}
+
+In the first case you will be interested in whether students appear to be using an \emph{algorithmic} mental model or not; those who don't may struggle at the start of the course. In the second case you will be interested to see whether students have the \emph{correct model} already; those who seem to be using an incorrect model and those who are still not using any model at all will need extra help. The third case is like the second, but you will be more interested in your overall success rate.
+
+In the analysis spreadsheet, the column headed \emph{judgement} contains the program's judgement of each response. The column \emph{reason} gives the mental models that seem to have been used and the number of times they have been observed. The columns labelled Q1, Q2 etc. give the program's classification of the answer(s) to each question.
+
+\subsection{Correct responses}
+
+In a pre-teaching test you will be looking for responses labelled Algorithmic or Possibly algorithmic, and not bothering too much about the particular models that were used. In the second and third cases you will be looking for overall \textbf{\textit{correct responses}}: \textbf{Algorithmic (overall)} in the judgement column and \textbf{M2+S1} in the reason column.
+
+\subsection{The judgements}
+
+When he devised his test, Saeed was looking for students who consistently -- i.e. throughout the test -- used an algorithmic model of assignment. He labelled their responses `consistent', and others `inconsistent'. But the words he chose read like psychometric measurements of the students rather than their responses, so we've renamed them.
+
+Broadly we divide responses into three groups:
+\begin{description*}
+\item[Blank responses] have fewer than 8 answers;  
+\item[Algorithmic responses] appear to use the same mental model(s) on many answers;
+\item[Unrecognised responses] are those which are neither Blank nor Algorithmic.
+\end{description*}
+We don't see many Blanks. The majority of responses, even in our experiment with 14-year-old schoolchildren, are Algorithmic -- usually two thirds, and sometimes many more. We chose Unrecognised rather than Inconsistent to indicate that those responses are simply not understood; they may be rational and even algorithmic in ways that we haven't anticipated.
+
+\subsection{Subdivisions of Algorithmic}
+
+In his thesis Saeed recognised as algorithmic those responses which used the same models in 8 out of 12 questions \textbf{\textit{or}} which used the same models in the first 6 questions. We've added those which use the same models in 6 out of the last 9 (the multi-variable questions). 
+
+Saeed's marking algorithm concentrated on the assignment model (\secref{assignmentmodels}) and ignored the sequence model (\secref{sequencemodels}). The analysis tool is stricter: it classifies as \emph{Possibly algorithmic} those responses which use the same assignment but not always the same sequence model. 
+
+That gives us six judgements:
+\begin{description*}
+\item [Algorithmic (overall)] -- same models in 8 of 12 answers;
+\item [Algorithmic (first 6)] -- same models in first 6 answers;
+\item [Algorithmic (last 9)] -- same models in 6 of the last 9 answers;
+\item [Possibly algorithmic (overall)] -- same assignment model in 8 of 12 answers;
+\item [Possibly algorithmic (first 6)] -- same assignment model in first 6 answers;
+\item [Possibly algorithmic (last 9)] -- same assignment model in 6 of the last 9 answers;
+\end{description*}
+A large majority of Algorithmic judgements are Algorithmic (overall). 
+
+We've also added some experimental judgements, but we aren't confident that the tool can accurately identify the relevant responses, so don't put too much faith in them. 
+\begin{description}
+\item[Sequentially algorithmic responses] appear to use one model for a while, and then switch to another;
+\item[Concurrently algorithmic responses] use more than one model at once, giving an answer to each question for each model.
+\end{description}
+Both these kinds of response are rare, and concurrently algorithmic responses -- even if we can recognise them accurately -- are very rare indeed.
+
+\subsection{Particular non-algorithmic responses}
+
+In our experiment with schoolchildren a few participants ticked every box. That seems to us to be a sort of protest response, and we have a judgement (\textbf{Ticked Everything}) for it.
+
+One of Saeed's assignment models (M9 in \secref{assignmentmodels}) is No Change. The respondent ticks the box which lists the original values of the variables, a rational answer which indicates that the assignment statement in the question has no effect. It's rational, but it's not algorithmic, so it has a judgement (\textbf{No change}) of its own.
+
+\subsection{Assignment models}
+\secref{assignmentmodels}
+See \tabref{assignmentmodels} for Saeed's models of the Java/C assignment \texttt{a=b}.
+
+\begin{table}
+\caption{Models of assignment \texttt{a=b} where initially a=A, b=B}
+\centering
+\vstrut{2pt}\\
+\begin{tabular}{|r|l|l|}
+\hline
+M1 & Right-to-left move & a=B, b=0 \\
+M2 & Right-to-left copy & a=B, b=B \\
+M3 & Left-to-right move & a=0, b=A \\
+M4 & Left-to-right copy & a=A, b=A \\
+M5 & Right-to-left copy-and-add & a=A+B, b=B \\
+M6 & Right-to-left move-and-add & a=A+B, b=0 \\
+M7 & Left-to-right copy-and-add & a=A, b=B+A \\
+M8 & Left-to-right move-and-add & a=0, b=B+A \\
+\hline
+M9 & No Change & a=A, b=B \\
+M10 & Equality & a=A, b=B \textbf{and} a=B, b=B \\ 
+\hline
+M11 & Swap & a=B, b=A \\
+\hline
+\end{tabular}
+\tablabel{assignmentmodels}
+\end{table}
+
+M1-M8 and M11 are recognisable assignment models. M9 is a non-algorithmic model. M10 seems to arise from an interpretation of the equality sign as algebraic equality. 
+
+Note that M10 answers require as many ticks as there are variables -- in two-variable questions two as shown in \tabref{assignmentmodels} -- in three-variable questions three ticks: a=A, b=A, c=A; a=B, b=B, c=B; a=C, b=C, c=C -- and so on).
+
+The `correct' model is of course M2.
+
+\subsection{Sequence models}
+\seclabel{sequencemodels}
+See \tabref{sequencemodels} for Saeed's model of composition \texttt{C1 C2}. (Note that in Java and C the semicolon is part of the assignment statement \dots Isn't it wonderful?)
+\begin{table}
+\caption{Models of composition \texttt{C1 C2}}
+\centering
+\vstrut{2pt}\\
+\begin{tabular}{|r|l|p{250pt}|}
+\hline
+S1 & Sequential & give the result of applying C2 to (the result of applying C1 to the initial state). \\
+\hline
+S2 & Parallel & give the result of applying C1 to the initial state \textbf{and} the result of applying C2 to the initial state. \\
+\hline
+S3 & Parallel destination-only & use `copy' in place of `move' (i.e. M2 rather than M1, M4 rather than M3, etc.), and then as S2. \\
+\hline
+\end{tabular}
+\tablabel{sequencemodels}
+\end{table}
+
+S3 is quite a common choice, and it's the source of the ambiguity about assignment models which makes marking the test so complicated.
+
+\newpage
+\section{Analysing the legacy test results}
+
+If you have inadvertently downloaded and used Saeed's original test (the file ``\emph{test(week 0)-5.doc}'' on his website), you don't have to mark the results by hand. The test description ``\emph{LegacyDehnadiText.txt}'' can be used to generate a .csv file with the original questions in their original order, which you can fill in and then analyse as described above.
+
+\newpage
+\appendix
+\section{Description files}
+
+A questionnaire falls naturally into two parts: questions about the participant themselves; and the programming questions that investigate the way they think about programming. These two parts are described by separate text files.
+
+\subsection{What to do if you can't edit the description files}
+
+Mac OS X and Linux use a line-feed character (LF) to show the end of a line. Windows uses two characters -- carriage return and line feed (CR and LF). In the Bad Old Days, before OS X, Mac used carriage-return (CR).
+
+If you can't edit the description files then it's probably because you are running Windows and the files use LF rather than CRLF. You could complain to the person who sent you the files, or you could use a program (e.g. EditPad) that can convert them for you.
+
+\newpage
+\section{Questionnaire description}
+
+Describes the material surrounding a test: explanations, queries about the participant, that sort of thing.
+
+The file contains a sequence of blocks. Most blocks describe questions (like `what is your name?') or texts (like `hello, welcome to the programming questionnaire'). Blocks will be displayed to questionnaire participants in the order they are given, though there are ways of skipping some blocks (see **If).
+
+\subsection{Command line}
+\seclabel{commandline}
+The first line of a block is always a command line. A command line starts with two asterisks followed immediately (no space allowed) by a command word like Title or Authorisation. If there is more stuff on the command line the command word is followed by a space and then that extra stuff. What follows the command line depends on what command it is. Here, for example, is how you might describe a question which asks a person's gender:
+\begin{quote}
+\begin{verbatim}
+**Choice Gender 2 true
+Gender
+**Option M
+Male
+**Option F
+Female
+\end{verbatim}
+\end{quote}
+See below for more information about **Choice blocks.
+
+\subsection{Command arguments}
+
+Most command lines include arguments to the command -- a space separated list of items. In the example above the question is named `Gender', it includes two options, and it is compulsory. The first option is called M and the second option is called F. Note that the block contains three sub-blocks: the question text (here a single word) and two options, each of which contains option text (here, each a single word).
+
+\subsection{HTML text}
+
+All text which is to be displayed to the participant -- e.g. `Gender', `Male' and `Female' in the example above -- is interpreted as HTML. Most text-editing programs let you insert HTML styling markers like \textless{}i\textgreater{} and \textless{}/i\textgreater{}. Good luck.
+
+\subsection{Compulsory commands}
+
+You must include at least a questionnaire title (**Title) and a questionnaire (**Questionnaire). Different questionnaire types may require more: in a LimeSurvey questionnaire, for example, you must also include welcome (**Welcome) and goodbye (**Goodbye) commands.
+
+\subsection{Named directives and options}
+
+Online survey software wants named questions and options. So all the questions and options have a `name' argument.
+
+\subsection{Compulsory questions}
+
+You may wish to force a participant to answer a question: you might really need to know their student number, for example. The last argument of a command is normally `true' or `false': true for compulsory, false for optional.
+
+\subsection{Conditional execution -- **If, **Else, **Elsf, **Fi}
+\seclabel{conditionalexecution}
+
+You may have a question which you want to ask only if the participant has answered some earlier question -- usually a **Choice -- in a particular way. You insert a **If directive
+\begin{quote}
+**If \phr{qname} \phr{optname}
+\end{quote}
+and what follows, up to the next **Else, **Elsf or **Fi (whichever comes first) will be used only if the participant chose option \emph{optname} as the answer to question \emph{qname}.
+
+**Else works as you would expect: what follows is shown in case the preceding **If fails. **Elsf \phr{qname1} \phr{optname1} replaces **Else followed by **If, and reduces the number of **Fi command lines you need.
+
+For each **If there must be exactly one **Fi, a closing bracket to the conditional.
+
+\subsection{Commands}
+\subsubsection{**ArrayChoice}
+Shows an array of radio buttons. The participant may pick one radio button on each line.
+\begin{quote}
+**ArrayChoice \phr{name} \phr{compulsory}\\
+\phr{text} \\
+\phr{columns} \\
+\phr{rows}
+\end{quote}
+Each \emph{column} is 
+\begin{quote}
+**Vertical \phr{name} \\
+\phr{text}
+\end{quote}
+-- the column label is \emph{text}. Each \emph{row}, similarly, is
+\begin{quote}
+**Horizontal \phr{name} \\
+\phr{text}
+\end{quote}
+
+\subsubsection{**Authorisation}
+Used when you want to ask the participant's permission to do something with the questionnaire results. Gives them the alternative of accepting or refusing. Abandons the questionnaire if they refuse.
+\begin{quote}
+**Authorisation \phr{name} \\
+\phr{text1} \\
+**OK \phr{text2} \\
+**NotOK \phr{text3} \\
+\phr{text4}
+\end{quote}
+The participant sees \emph{text1} with two radio buttons labelled \emph{text2} and \emph{text3}. If they select \emph{text3} the next page they see shows \emph{text4} and that, for that participant, is the end of the questionnaire.
+
+\subsubsection{**Authorization}
+
+Same as **Authorisation, for people who want to spell like Americans (or Oxfordians).
+
+\subsubsection{**Choice}
+Shows a set of radio buttons from which the participant must choose one. See also **MultiChoice.
+\begin{quote}
+**Choice \phr{name} \phr{numoptions} \phr{compulsory}\\
+\phr{text} \\
+\phr{options}
+\end{quote}
+For options, see **Option; there must be exactly \emph{numoptions} of them.
+
+\subsubsection{**Else}
+See \secref{conditionalexecution}.
+
+\subsubsection{**Elsf}
+See \secref{conditionalexecution}.
+
+\subsubsection{**Fi}
+See \secref{conditionalexecution}.
+
+\subsubsection{**Final}
+Comes at the end of the questionnaire, just before **Goodbye (if included). Gives a large text box for participants to past comments in. 
+\begin{quote}
+**Goodbye \\
+\phr{text}
+\end{quote}
+
+\subsubsection{**Goodbye}
+A page of text to be shown after all other questions (unless authorisation is refused, when the last page is \emph{text4} from the authorisation question). 
+\begin{quote}
+**Goodbye \\
+\phr{text}
+\end{quote}
+
+\subsubsection{**Group}
+Essentially, start a new page of questions
+\begin{quote}
+**Group \phr{groupname} \phr{text}
+\end{quote}
+\emph{text} is the title of the new page.
+
+\subsubsection{**If}
+See \secref{conditionalexecution}.
+
+\subsubsection{**MultiChoice}
+Shows a set of tick boxes which the participant may tick. If compulsory, at least one must be ticked. See also **Choice.
+\begin{quote}
+**MultiChoice \phr{name} \phr{numoptions} \phr{compulsory}\\
+\phr{text} \\
+\phr{options}
+\end{quote}
+For options, see **Option; there must be exactly \emph{numoptions} of them.
+
+\subsubsection{**MultiText}
+A question with several sub-questions, to each of which the user may type some text. (May, not must: even if the question is compulsory, not every sub-question need be answered. I think.)
+\begin{quote}
+**MultiText \phr{name} \phr{numoptions} \phr{compulsory}\\
+\phr{text} \\
+\phr{options}
+\end{quote}
+For options, see **Option; there must be exactly \emph{numoptions} of them (why? belt and braces? I dunno).
+
+\subsubsection{**Number}
+A special version of **Text in which the response which the participant types must be a numeral.
+\begin{quote}
+**Number \phr{name} \phr{compulsory} \\
+\phr{text}
+\end{quote}
+
+\subsubsection{**Option}
+An alternative or a sub-question.
+\begin{quote}
+**Option \phr{name} \\
+\phr{text} 
+\end{quote}
+
+\subsubsection{**Questionnaire}
+\seclabel{questionnairequestionnaire}
+Insert the questions of the programming questionnaire.
+\begin{quote}
+**Questionnaire
+\end{quote}
+The questions of that questionnaire are inserted into the questionnaire at this point. Usually you will put **Questionnaire after the personal questions and before **Final and **Goodbye (if included).
+
+\subsubsection{**Title}
+Gives the title you choose for your questionnaire. 
+\begin{quote}
+**Title \phr{text}
+\end{quote}
+
+\subsubsection{**Text}
+
+Ask a question to which the participant must type some text.
+\begin{quote}
+**Text \phr{name} \phr{compulsory} \\
+\phr{text}
+\end{quote}
+Displays a text-input box labelled with \emph{text}.
+
+\subsubsection{**Welcome}
+A page of text to be shown before any other questions (even authorisation questions). 
+\begin{quote}
+**Welcome \\
+\phr{text}
+\end{quote}
+
+\newpage
+\section{Test description}
+\seclabel{testdescription}
+Test descriptions give the meat of the test: questions about little assignment programs. They must start with a **Id, they may contain a **Title, and they must contain **Questions. And that's it.
+
+\subsubsection{**Id}
+\seclabel{questionnaireid}
+Must come first in the questionnaire description.
+
+Gives the identifier of the questionnaire. Sort of version control. 
+\begin{quote}
+**Id \phr{text}
+\end{quote}
+
+\subsubsection{**Title}
+Gives a title for the questionnaire. I've forgotten what happens if you put a title in both the questionnaire description and the test description. Perhaps it shows both.
+\begin{quote}
+**Title \phr{text}
+\end{quote}
+
+\subsubsection{**Questions}
+
+The meat of the questionnaire.
+\begin{quote}
+**Questions \\
+\phr{questions}
+\end{quote}
+Each question is on a single line; blank lines are ignored. It consists of some Java/C declarations followed by some assignments. For example:
+\begin{quote}
+\begin{verbatim}
+int a = 5; int b = 3; int c = 7; a = c; b = a; c = b;
+\end{verbatim}
+\end{quote}
+The generator complains if the assignments use undeclared variables, or if there is a multiple declaration of a single variable name. Otherwise (I think) anything goes.
+%\bibliographystyle{plainnat}
+%\bibliography{bornat} 
+
+\end{document}
