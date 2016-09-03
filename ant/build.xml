@@ -6,8 +6,10 @@
     <property name="jars.dir"   	  value="${build.dir}/jars"/>
 	<property name="progjar.name"	  value="DehnadiGenAn.jar"/>
 	<property name="final.jar"		  value="${jars.dir}/${progjar.name}"/>
-    <property name="commons.dir"  	  value="../../apache.commons.for.ant" />
-    <property name="javatuples.dir"   value="../../javatuples-1.2/lib"/>
+    <property name="commons.dir"  	  value="../lib/apache_commons" />
+    <property name="commons.jar"  	  value="commons-lang3-3.1.jar" />
+    <property name="javatuples.dir"   value=".,/lib/javatuples/lib"/>
+    <property name="javatuples.jar"   value="javatuples-1.2.jar"/>
 
     <property name="main.class"       value="uk.ac.mdx.RBornat.Saeedgenerator.Generator"/>
 
@@ -25,7 +27,7 @@
         <mkdir dir="${classes.dir}"/>
         <javac 
             sourcepath=""
-        	classpath="${javatuples.dir}/javatuples-1.2.jar:${commons.dir}/commons-lang3-3.1-sources.jar"
+        	classpath="${javatuples.dir}/${javatuples.jar}:${commons.dir}/${commons.jar}"
             srcdir="${src.dir}"
             destdir="${classes.dir}"
             source="1.6"
@@ -43,8 +45,8 @@
                 <fileset dir="${classes.dir}"/>
             </main>
             <lib>
-                <fileset file="${commons.dir}/commons-lang3-3.1.jar"  />
-                <fileset file="${javatuples.dir}/javatuples-1.2.jar" />
+                <fileset file="${commons.dir}/${commons.jar}"  />
+                <fileset file="${javatuples.dir}/${javatuples.jar}" />
             </lib>
         </one-jar>
     </target>
