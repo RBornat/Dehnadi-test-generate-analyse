@@ -1,0 +1,82 @@
+<project>
+
+    <property name="src.dir"          value="../src"/>
+    <property name="build.dir"        value="build"/>
+    <property name="classes.dir"      value="${build.dir}/classes"/>
+    <property name="jars.dir"   	  value="${build.dir}/jars"/>
+	<property name="progjar.name"	  value="DehnadiGenAn.jar"/>
+	<property name="final.jar"		  value="${jars.dir}/${progjar.name}"/>
+    <property name="commons.dir"  	  value="../../apache.commons.for.ant" />
+    <property name="javatuples.dir"   value="../../javatuples-1.2/lib"/>
+
+    <property name="main.class"       value="uk.ac.mdx.RBornat.Saeedgenerator.Generator"/>
+
+	<!--<property name="one-jar.version"  value="0.97"/> 
+	<property name="one-jar.dist.dir" value="${ant.home}/lib/one-jar-ant-task-${one-jar.version}"/> 
+	<import file="${one-jar.dist.dir}/one-jar-ant-task.xml" optional="true" /> -->
+
+    <taskdef name="one-jar" classname="com.simontuffs.onejar.ant.OneJarTask" onerror="report" />
+    
+	<target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac 
+            sourcepath=""
+        	classpath="${javatuples.dir}/javatuples-1.2.jar:${commons.dir}/commons-lang3-3.1-sources.jar"
+            srcdir="${src.dir}"
+            destdir="${classes.dir}"
+            source="1.6"
+        	target="1.6"
+        />
+    </target>
+
+	<target name="onejarbuild">
+        <delete file="${final.jar}" />
+        <one-jar destfile="${final.jar}" onejarmainclass="${main.class}">
+           <manifest>
+              <attribute name="Main-Class" value="uk.ac.mdx.RBornat.Saeedgenerator.Generator"/>
+            </manifest>
+            <main>
+                <fileset dir="${classes.dir}"/>
+            </main>
+            <lib>
+                <fileset file="${commons.dir}/commons-lang3-3.1.jar"  />
+                <fileset file="${javatuples.dir}/javatuples-1.2.jar" />
+            </lib>
+        </one-jar>
+    </target>
+	
+    <target name="build" depends="compile">
+        <mkdir dir="${jars.dir}"/>
+        <delete file="${final.jar}" />
+        <jar destfile="${final.jar}"
+        	basedir="${classes.dir}"
+        	includes="**/*.class"
+            >
+           <manifest>
+              <attribute name="Main-Class" value="uk.ac.mdx.RBornat.Saeedgenerator.Generator"/>
+            </manifest>
+        </jar>
+    	<jar destfile="${final.jar}"
+    		basedir="${commons.dir}"
+    		update="yes"
+    		includes="FileUtils.class"
+    		>
+    	</jar>
+    </target>
+    
+	<target name="run" depends="onejarbuild">
+        <java jar="${final.jar}" fork="true"/>
+    </target>
+    
+	<target name="hello">
+        <echo> 
+            hello ${ant.home} 
+            javatuples ${javatuples.dir}
+        </echo>
+    </target>
+
+</project>
