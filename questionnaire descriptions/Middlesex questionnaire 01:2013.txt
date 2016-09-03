@@ -1,0 +1,41 @@
+**Title Middlesex Assignment survey
+**Welcome
+This test is about some of the work you did last term.
+
+It will help us identify any gaps in your understanding of two of the fundamental concepts of programming.
+
+Your results will <i>not</i> affect your marks: the test is purely for information that we can use to help you.
+**Group P Questions about you
+**Text name true
+Name
+**Text studentnumber true
+Student Number
+**Choice ok 3 true
+How do you think you are getting on in the course so far?
+**Option progr
+Very well
+**Option ok
+OK
+**Option notok
+Not very well
+**MultiChoice difficulty 3 true
+Which topics have you found difficult so far?
+**Option assign
+Assignment (=)
+**Option sequence
+Sequence (;)
+**Option choice
+choice (if/else)
+**Option loop
+Loops (while, for)
+**Option methods
+Methods (abc(), def(x,y))
+**Option arrays
+Arrays (a[i], b[i,j])
+**Questionnaire Dehnadi 1.1
+**Final finished
+You've reached the end of the questionnaire.
+
+If you want to make any comments, please leave them in the box below.
+**Goodbye
+Thank you for answering the questionnaire. Your answers will be analysed later today.

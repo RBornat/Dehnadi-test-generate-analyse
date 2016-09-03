@@ -1,0 +1,19 @@
+**Id Dehnadi 1.0
+**Title original questions
+**Questions
+
+int a = 10; int b = 20; a = b;
+int a = 10; int b = 20; b = a;
+int big = 10; int small = 20; big = small;
+            
+int a = 10; int b = 20; a = b; b = a;
+int a = 10; int b = 20; b = a; a = b;
+            
+int a = 10; int b = 20; int c = 30; a = b; b = c;
+            
+int a = 5; int b = 3; int c = 7; a = c; b = a; c = b;
+int a = 5; int b = 3; int c = 7; c = b; b = a; a = c;
+int a = 5; int b = 3; int c = 7; c = b; a = c; b = a;
+int a = 5; int b = 3; int c = 7; b = a; c = b; a = c;
+int a = 5; int b = 3; int c = 7; b = a; a = c; c = b;
+int a = 5; int b = 3; int c = 7; a = c; c = b; b = a;

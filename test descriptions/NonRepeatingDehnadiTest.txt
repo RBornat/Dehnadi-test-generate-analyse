@@ -1,0 +1,19 @@
+**Id Dehnadi 1.1
+**Title Dehnadi test (version 1.1)
+**Questions
+
+int a = 10; int b = 20; a = b;
+int a = 40; int b = 30; b = a;
+int big = 10; int small = 20; big = small;
+            
+int a = 10; int b = 20; a = b; b = a;
+int a = 40; int b = 30; b = a; a = b;
+            
+int a = 10; int b = 20; int c = 30; a = b; b = c;
+            
+int a = 5; int b = 3; int c = 7; a = c; b = a; c = b;
+int a = 6; int b = 9; int c = 5; c = b; b = a; a = c;
+int a = 14; int b = 20; int c = 3; c = b; a = c; b = a;
+int a = 3; int b = 10; int c = 2; b = a; c = b; a = c;
+int a = 0; int b = 1; int c = 2; b = a; a = c; c = b;
+int a = 2; int b = 4; int c = 8; a = c; c = b; b = a;

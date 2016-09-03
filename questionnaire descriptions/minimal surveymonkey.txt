@@ -1,0 +1,28 @@
+**Title Pprogramming aptitude test
+**Text name true
+Name
+**Text group true
+Class group
+**Choice set 1 true
+Set group
+**Option 9X1
+9X1 (PM)
+**Option 9X2
+9X2 (DB)
+**Option 9X3
+9X3 (LJO)
+**Option 9X4
+9X4 (FK)
+**Option 9Y1
+9Y1 (DB)
+**Option 9Y2
+9Y2 (LJO)
+**Option 9Y3
+9Y3 (FK PM)
+**Option 9Y4
+9Y4 (DB LJO JN)
+**Option 10X1
+10X1 (DB)
+**Option 10X2
+10X2 (PM DB)
+**Questionnaire Dehnadi 1.0

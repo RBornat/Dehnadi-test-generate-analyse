@@ -1,0 +1,108 @@
+**Title Dehnadi research questionnaire
+**Welcome
+This questionnaire measures the way you think. There are no right or wrong answers.
+
+First we collect some information about you.
+
+After that the questions are designed to be partly familiar, partly unfamiliar. 
+We want to see how you deal with that situation. 
+Please answer carefully. 
+
+If you change your mind about an answer, you can go back and alter it, 
+any time until you finish the questionnaire.
+**Authorisation auth
+The results of this questionnaire will be stored in a database
+and will be analysed statistically by researchers studying
+the learning of programming.
+
+Your results will never be released to anybody in such a way
+that you can be identified.
+**OK I am happy to allow my answers to be used in this way
+**NotOK I do not consent to use of my answers
+We're sorry you felt unable to participate.
+**Group P Background information about you
+**Text Name true
+Name 
+**Number Age true
+Age 
+**Choice Gender 2 true
+Gender
+**Option M
+Male
+**Option F
+Female
+**MultiText Qualifications true
+Previous qualifications (please list):
+**Option QualA
+A level
+**Option QualG
+GCSE (or O level)
+**Option QualO
+Other
+**Choice Programmer 3 true
+Have you ever written a computer program in any programming language?
+**Option Y
+Yes
+**Option N
+No
+**Option Q
+Not Sure
+**If Programmer Y
+**MultiChoice Language 5 true
+In what programming language(s) have you written programs?
+**Option Basic
+Basic
+**Option C
+C
+**Option Java
+Java
+**Option Cplus
+C++
+**Option VB
+Visual Basic
+**Option Fort	
+Fortran
+**Option Other
+Other
+**Fi
+**Choice Course 3 true
+This questionnaire comes as part of a programming course.
+
+Did you study programming before the beginning of this course?
+**Option Y
+Yes
+**Option N
+No
+**Option Q
+Not Sure
+**If Course Y
+**MultiText Previous true
+What programming course(s) did you take?
+**Option C1
+First course
+**Option C2
+Second course
+**Option C3
+Third course
+**ArrayChoice PassFail true
+And did you pass or fail?
+**Vertical PP 
+Pass 
+**Vertical PF 
+Fail 
+**Vertical PQ 
+Can't remember
+**Horizontal C1 
+First course
+**Horizontal C2 
+Second course
+**Horizontal C3 
+Third course
+**Fi
+**Questionnaire Dehnadi 1.0
+**Final finished
+You've reached the end of the questionnaire.
+
+If you want to make any comments, please leave them in the box below.
+**Goodbye
+Thank you for answering the questionnaire. Your answers will be analysed later.

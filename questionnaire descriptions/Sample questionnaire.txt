@@ -1,0 +1,17 @@
+**Title Sample Assignment survey
+**Welcome
+This is not a live questionnaire. If you fill it in your marks will not be recorded. 
+
+We've put this questionnaire on line so that you can see the questions about programming (the 'test').
+
+In a real questionnaire we'd start with stuff about you and your experience before getting to the programming stuff, ask for your permission to use your results in research, and so on. But that's all optional and programmable.
+
+To try the test, press Next.
+
+**Questionnaire Dehnadi 1.1
+**Goodbye
+That's the end of the test. 
+
+Normally we'd put something here about analysing your marks (the survey software can't do it at present).
+
+If you'd like more information, contact  <a href="mailto:R.Bornat@mdx.ac.uk">Richard Bornat</a> or <a href="mailto:S.Dehnadi@mdx.ac.uk">Saeed Dehnadi</a>.
