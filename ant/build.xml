@@ -35,7 +35,7 @@
         />
     </target>
 
-	<target name="onejarbuild">
+	<target name="build">
         <delete file="${final.jar}" />
         <one-jar destfile="${final.jar}" onejarmainclass="${main.class}">
            <manifest>
@@ -51,34 +51,7 @@
         </one-jar>
     </target>
 	
-    <target name="build" depends="compile">
-        <mkdir dir="${jars.dir}"/>
-        <delete file="${final.jar}" />
-        <jar destfile="${final.jar}"
-        	basedir="${classes.dir}"
-        	includes="**/*.class"
-            >
-           <manifest>
-              <attribute name="Main-Class" value="uk.ac.mdx.RBornat.Saeedgenerator.Generator"/>
-            </manifest>
-        </jar>
-    	<jar destfile="${final.jar}"
-    		basedir="${commons.dir}"
-    		update="yes"
-    		includes="FileUtils.class"
-    		>
-    	</jar>
-    </target>
-    
-	<target name="run" depends="onejarbuild">
+	<target name="run" depends="build">
         <java jar="${final.jar}" fork="true"/>
     </target>
-    
-	<target name="hello">
-        <echo> 
-            hello ${ant.home} 
-            javatuples ${javatuples.dir}
-        </echo>
-    </target>
-
 </project>
