@@ -1,5 +1,7 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
+import static uk.ac.mdx.RBornat.Saeedgenerator.Localizer.__;
+
 import java.awt.FileDialog;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,8 +26,6 @@ public class PaperQuestionnaire {
     }
     
     static final String 
-    progQuestionPreamble = 
-        "Read the following statements and tick the box next to the correct answer",
     answerPreamble =
         "The new values of";
 
@@ -58,7 +58,7 @@ public class PaperQuestionnaire {
         
         questionsout.write(
                 "\\newcommand{\\questionpreamble}{\\vstrut{10pt}" +
-                progQuestionPreamble+" in the next column.}" + TextUtils.LineSep+
+                __("paper.progQuestionPreamble")+" in the next column.}" + TextUtils.LineSep+
                 "\\newcommand{\\answerpreamble}{"+answerPreamble+"}"+TextUtils.LineSep+
                 "\\newcommand{\\answermidamble}{\\vstrut{20pt}Any other values for}"+TextUtils.LineSep+
                 "\\newcommand{\\notespreamble}{\\vstrut{10pt}Use this column for your rough notes please}"+TextUtils.LineSep+
@@ -239,7 +239,7 @@ public class PaperQuestionnaire {
     
     static String[] questionLines(TestQuestion q) {
         Vector<String> lines = new Vector<String>(10);
-        lines.add(progQuestionPreamble+" below.");
+        lines.add(__("paper.progQuestionPreamble")+" below.");
         lines.add(""); // blank line
         VarVal[] pairs = q.state.pairs;
         for (VarVal vv : pairs) 
