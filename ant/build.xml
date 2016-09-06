@@ -33,6 +33,11 @@
             source="1.6"
         	target="1.6"
         />
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}" casesensitive="yes">
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
     </target>
 
 	<target name="build" depends="compile">
