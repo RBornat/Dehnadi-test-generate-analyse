@@ -31,6 +31,7 @@ public class PaperQuestionnaire {
 
     void laTeXPreambles(String title, String[] welcome) throws IOException {
         String commonheader = "\\documentclass[11pt,a4wide]{article}"+TextUtils.LineSep+
+        __("paper.localPreamble")+TextUtils.LineSep+
         "\\usepackage{varwidth}"+TextUtils.LineSep+
         "\\usepackage{alltt}"+TextUtils.LineSep+
         "\\usepackage{multirow}"+TextUtils.LineSep+
