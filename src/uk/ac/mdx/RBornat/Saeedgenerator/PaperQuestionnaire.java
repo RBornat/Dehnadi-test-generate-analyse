@@ -1,5 +1,7 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
+import static uk.ac.mdx.RBornat.Saeedgenerator.Localizer.__;
+
 import java.awt.FileDialog;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,14 +25,9 @@ public class PaperQuestionnaire {
         this.csvout = csvout;
     }
     
-    static final String 
-    progQuestionPreamble = 
-        "Read the following statements and tick the box next to the correct answer",
-    answerPreamble =
-        "The new values of";
-
     void laTeXPreambles(String title, String[] welcome) throws IOException {
         String commonheader = "\\documentclass[11pt,a4wide]{article}"+TextUtils.LineSep+
+        __("paper.localPreamble")+TextUtils.LineSep+
         "\\usepackage{varwidth}"+TextUtils.LineSep+
         "\\usepackage{alltt}"+TextUtils.LineSep+
         "\\usepackage{multirow}"+TextUtils.LineSep+
@@ -58,10 +55,10 @@ public class PaperQuestionnaire {
         
         questionsout.write(
                 "\\newcommand{\\questionpreamble}{\\vstrut{10pt}" +
-                progQuestionPreamble+" in the next column.}" + TextUtils.LineSep+
-                "\\newcommand{\\answerpreamble}{"+answerPreamble+"}"+TextUtils.LineSep+
-                "\\newcommand{\\answermidamble}{\\vstrut{20pt}Any other values for}"+TextUtils.LineSep+
-                "\\newcommand{\\notespreamble}{\\vstrut{10pt}Use this column for your rough notes please}"+TextUtils.LineSep+
+                __("paper.progQuestionPreamble")+" " + __("paper.nextColumn") + "}" + TextUtils.LineSep+
+                "\\newcommand{\\answerpreamble}{"+__("paper.answerPreamble")+"}"+TextUtils.LineSep+
+                "\\newcommand{\\answermidamble}{\\vstrut{20pt}"+__("paper.otherValues")+"}"+TextUtils.LineSep+
+                "\\newcommand{\\notespreamble}{\\vstrut{10pt}"+__("paper.roughNotes")+"}"+TextUtils.LineSep+
                 "\\newcommand{\\tickbox}{\\raisebox{0mm}{\\fbox{\\hstrut{1.5mm}\\vstrut{1.5mm}}}}"+TextUtils.LineSep);
         
         questionsout.write("\\title{"+title+"}"+TextUtils.LineSep+
@@ -126,7 +123,7 @@ public class PaperQuestionnaire {
     static void showVariables(MaybeFileWriter f, State s) throws IOException {
         for (int i=0; i<s.pairs.length-2; i++)
             f.write(s.pairs[i].var+", ");
-        f.write(s.pairs[s.pairs.length-2].var+" and "+s.pairs[s.pairs.length-1].var);
+        f.write(s.pairs[s.pairs.length-2].var+" "+__("paper.and")+" "+s.pairs[s.pairs.length-1].var+__("paper.variablesClose"));
     }
     
     void outputLaTeXQuestionAndAnswers(int qidx, TestQuestion question, AnswerPage answers,
@@ -239,7 +236,7 @@ public class PaperQuestionnaire {
     
     static String[] questionLines(TestQuestion q) {
         Vector<String> lines = new Vector<String>(10);
-        lines.add(progQuestionPreamble+" below.");
+        lines.add(__("paper.progQuestionPreamble")+" below.");
         lines.add(""); // blank line
         VarVal[] pairs = q.state.pairs;
         for (VarVal vv : pairs) 
@@ -248,7 +245,7 @@ public class PaperQuestionnaire {
         for (Assign a : q.commands) 
             lines.add(a.toString());
         lines.add("");
-        lines.add(answerPreamble+" "+stringOfStateVars(q.state)+":");
+        lines.add(__("paper.answerPreamble")+" "+stringOfStateVars(q.state)+":");
         return lines.toArray(new String[lines.size()]);
     }
     
@@ -264,7 +261,7 @@ public class PaperQuestionnaire {
         String r = "";
         for (int i=0; i<s.pairs.length-2; i++)
             r = r+s.pairs[i].var+", ";
-        r = r + s.pairs[s.pairs.length-2].var+" and "+s.pairs[s.pairs.length-1].var;
+        r = r + s.pairs[s.pairs.length-2].var+" "+__("paper.and")+" "+s.pairs[s.pairs.length-1].var;
         return r;
     }
     
@@ -389,14 +386,12 @@ public class PaperQuestionnaire {
     void processAuthorisationQuestion(Questionnaire.AuthQuestion question) throws IOException {
         questionsout.write(TextUtils.LaTeXParaSep+"\\hsep{100pt}"+TextUtils.LaTeXParaSep);
         questionsout.write(TextUtils.enParaLaTeX(question.authText)+TextUtils.LaTeXParaSep);
-        questionsout.write("If you are happy to allow your answers to be used in this way, " +
-        		"please sign here: \\\\" +
+        questionsout.write(__("paper.permissionSignaturePreamble") +
+        		"\\\\" +
         		"\\vstrut{35pt} \\\\" +
-        		"and then fill in the rest of the questionnaire."+TextUtils.LaTeXParaSep);
+        		__("paper.permissionSignatureClosing")+TextUtils.LaTeXParaSep);
 
-	questionsout.write("If you do not consent to use of your answers, " +
-			"we're sorry you weren't able to participate. " +
-			"Please ignore the rest of the questionnaire." +TextUtils.LineSep);
+	questionsout.write(__("paper.nonPermissionClosing") + TextUtils.LineSep);
     }
     
     void newPage(MaybeFileWriter f) throws IOException {
