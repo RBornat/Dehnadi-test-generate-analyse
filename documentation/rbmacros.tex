@@ -1,0 +1,31 @@
+%% stripped down for Dehnadi models documentation
+
+\newcommand {\cols}[1][*{50}{l}]{\begin{array}{#1}}
+\newcommand {\sloc}{\end{array}}
+
+\newcommand{\hstrut}[1]{\rule{#1}{0pt}}
+\newcommand{\vstrut}[1]{\rule{0pt}{#1}}
+
+\newcommand{\eqnlabel}[1]{\label{eqn:#1}}
+\newcommand{\eqnref}[1]{(\ref{eqn:#1})}
+\newcommand{\figlabel}[1]{\label{fig:#1}}
+\newcommand{\figref}[1]{figure \ref{fig:#1}}
+\newcommand{\Figref}[1]{Figure \ref{fig:#1}}
+\newcommand{\seclabel}[1]{\label{sec:#1}}
+\newcommand{\secref}[1]{section \ref{sec:#1}}
+\newcommand{\Secref}[1]{Section \ref{sec:#1}}
+\newcommand{\tablabel}[1]{\label{tab:#1}}
+\newcommand{\tabref}[1]{table \ref{tab:#1}}
+\newcommand{\Tabref}[1]{Table \ref{tab:#1}}
+
+% no para iodent
+\makeatletter
+\renewcommand{\@makefntext}[1]{\setlength{\parindent}{0pt}%
+\begin{list}{}{\setlength{\labelwidth}{1em}%
+  \setlength{\leftmargin}{\labelwidth}%
+  \setlength{\labelsep}{3pt}\setlength{\itemsep}{0pt}%
+  \setlength{\parsep}{0pt}\setlength{\topsep}{0pt}%
+  \footnotesize}\item[\hfill\@makefnmark]#1%
+\end{list}}
+\makeatother
+
