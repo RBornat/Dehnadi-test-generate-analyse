@@ -13,7 +13,6 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,7 +24,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class Generator {
     final static boolean onMacOSX = System.getProperty("os.name").equals("Mac OS X");    
-    final static boolean runningBlind = onMacOSX && System.getProperty("os.version").startsWith("10.11"); 
+    final static boolean runningBlind = onMacOSX && (System.getProperty("os.version").startsWith("10.11") ||
+                                                     System.getProperty("os.version").startsWith("10.12")); 
 
     static Value v0 = new Value(0);
     static final String version = "1.2";
@@ -379,9 +379,9 @@ public class Generator {
          
          Questionnaire questionnaire = new Questionnaire(questionnairein, testin, true, questionnaireType);
 
-         Test test = questionnaire.test;
+         // Test test = questionnaire.test;
          // TestQuestion[] questions = test.progQuestions;
-         AnswerPage[] answerPages = test.answerPages;
+         // AnswerPage[] answerPages = test.answerPages;
          File targetDirFile = null;
         
          String questionnaireID = RandomStringUtils.randomAlphanumeric(questionnaireIDlength);

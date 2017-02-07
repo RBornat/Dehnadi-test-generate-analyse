@@ -2,16 +2,12 @@ package uk.ac.mdx.RBornat.Saeedgenerator;
 
 import java.awt.FileDialog;
 import java.awt.Frame;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import uk.ac.mdx.RBornat.Saeedgenerator.Generator.ActionType;
 
 public class Utils {
     
@@ -117,8 +113,8 @@ public class Utils {
 
     public static File askFile(int loadorsave, String title, String directoryprefid, String fileprefid, 
             String filedefault) {
-        if (Generator.runningBlind) {
-            Utils.showInfoAlert(title, "Java for OS X 10.11 has a bug. It doesn't show the title bar "+
+        if (Generator.runningBlind && loadorsave==FileDialog.LOAD) {
+            Utils.showInfoAlert(title, "Java for OS X 10.11/12 has a bug. It doesn't show the title bar "+
                                        "on file dialogs.\n\n The file dialog you are about to see "+
                                        "should be titled \""+title+"\"");
         }
