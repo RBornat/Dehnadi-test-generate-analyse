@@ -1,19 +1,14 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
-import java.awt.FileDialog;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
-
-import uk.ac.mdx.RBornat.Saeedgenerator.Questionnaire.QuestionnaireType;
 
 public class Test {
     

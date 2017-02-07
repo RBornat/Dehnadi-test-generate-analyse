@@ -13,6 +13,7 @@ import java.util.Map;
 public abstract class AbstractEnumThingy<T extends Enum<T>> {
     protected Class<T> enumClass;
     
+    @SuppressWarnings("unchecked")
     AbstractEnumThingy() {
         this.enumClass = (Class<T>) ((ParameterizedType) getClass()  
                 .getGenericSuperclass()).getActualTypeArguments()[0]; 
@@ -29,6 +30,7 @@ public abstract class AbstractEnumThingy<T extends Enum<T>> {
      * @param type the type
      * @return the underlying class
      */
+    @SuppressWarnings("rawtypes")
     public static Class<?> getClassFromType(Type type, Map<Type, Type> resolvedTypes) {
         System.err.println("getClassFromType("+type+")");
       if (type instanceof Class) {
@@ -73,6 +75,7 @@ public abstract class AbstractEnumThingy<T extends Enum<T>> {
      * @param childClass the child class
      * @return a list of the raw classes for the actual type arguments.
      */
+    @SuppressWarnings("rawtypes")
     public static <T> List<Class<?>> getTypeArguments(Class<T> baseClass, Class<? extends T> childClass) {
         System.err.println("getTypeArguments("+baseClass+", "+childClass+")");
         Map<Type, Type> resolvedTypes = new HashMap<Type, Type>();

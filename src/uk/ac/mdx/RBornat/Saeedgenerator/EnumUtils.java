@@ -1,16 +1,6 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.swing.JOptionPane;
 
 class EnumUtils<T extends Enum<T>> /* extends AbstractEnumThingy<T> */ {
@@ -26,6 +16,7 @@ class EnumUtils<T extends Enum<T>> /* extends AbstractEnumThingy<T> */ {
     T showOptionDialog(String title, String message, T defaultval) {
         EnumSet<T> eset = EnumSet.allOf(enumClass);
         int typeCount = eset.size();
+        @SuppressWarnings("unchecked")
         T[] values = eset.toArray((T[])java.lang.reflect.Array.newInstance(enumClass,typeCount));
         int at = 
             JOptionPane.showOptionDialog(

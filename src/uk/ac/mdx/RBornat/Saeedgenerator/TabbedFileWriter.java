@@ -2,7 +2,6 @@ package uk.ac.mdx.RBornat.Saeedgenerator;
 
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 

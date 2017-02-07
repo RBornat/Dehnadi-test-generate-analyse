@@ -1,14 +1,9 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
-import java.awt.FileDialog;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Vector;
-
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -16,7 +11,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.javatuples.Pair;
 
 import org.w3c.dom.Document;
@@ -51,7 +45,6 @@ public class LimeSurveyQuestionnaire {
     private HashMap<String,Pair<Integer,Integer>> questionMap = new HashMap<String,Pair<Integer,Integer>>(20);
     
     LimeSurveyQuestionnaire(Document doc, Questionnaire questionnaire) {
-        boolean authorised;
         this.doc = doc;
         Element rootElement = doc.createElement("document");
         doc.appendChild(rootElement);
@@ -774,8 +767,6 @@ public class LimeSurveyQuestionnaire {
                      "scale_id", "0"
              });
          
-         // verticals
-         int subQuestionOrder = 0;
          for (Pair<String, String[]> h : question.horizs) 
              appendSubquestionRow(
                  new String[] {
@@ -1160,6 +1151,7 @@ public class LimeSurveyQuestionnaire {
         }
     }
     
+    @SuppressWarnings("serial")
     static class Headers extends SpreadsheetHeaders {
         int tiStart=0;
         

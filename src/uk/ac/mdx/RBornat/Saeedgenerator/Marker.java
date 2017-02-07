@@ -76,6 +76,7 @@ public class Marker {
     }
 
     SimpleSet<State>[] findTicks(MaybeFileWriter diagout, String[] row) throws IOException {
+        @SuppressWarnings("unchecked")
         SimpleSet<State> [] ticks = 
             (SimpleSet<State> [])java.lang.reflect.Array.newInstance(new SimpleSet<State>().getClass(), qq.progQuestions.length);
         for (int qidx = 0; qidx<qq.progQuestions.length; qidx++) {

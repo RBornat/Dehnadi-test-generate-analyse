@@ -1,8 +1,6 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 
 // Seems to be the entry for one question. answers is all the answers we recognise; choices is those that we list

@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import org.javatuples.Pair;
 
+@SuppressWarnings("serial")
 class SpreadsheetHeaders extends Vector<String> {
     int quStart=0, quEnd=0;
     

@@ -150,7 +150,6 @@ public class TextUtils {
     
     static String[] tokenise(String line) { 
         Vector<String> tokens = new Vector<String>(10);
-        int c;
         int i = 0;
         
         while (i<line.length() && line.charAt(i)==' ') i++;

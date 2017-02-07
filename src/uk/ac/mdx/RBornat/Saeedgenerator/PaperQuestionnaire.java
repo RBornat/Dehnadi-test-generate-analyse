@@ -2,7 +2,6 @@ package uk.ac.mdx.RBornat.Saeedgenerator;
 
 import static uk.ac.mdx.RBornat.Saeedgenerator.Localizer.__;
 
-import java.awt.FileDialog;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -483,7 +482,7 @@ public class PaperQuestionnaire {
         questionsout.write(TextUtils.enParaLaTeX(question.questionText)+TextUtils.LaTeXParaSep);
         
         questionsout.write("\\begin{tabular}{r|");
-        for (Pair <String, String[]> vertic : question.vertics)
+        for (@SuppressWarnings("unused") Pair <String, String[]> vertic : question.vertics)
             questionsout.write("c|");
         questionsout.write("}"+TextUtils.LineSep);
         questionsout.write("\\multicolumn{1}{r}{}");
@@ -495,7 +494,7 @@ public class PaperQuestionnaire {
         for (Pair <String, String[]>horiz : question.horizs) {
             questionsout.write("\\cline{2-"+(question.vertics.length+1)+"}"+TextUtils.LineSep);
             questionsout.write(TextUtils.enLine(horiz.getValue1()));
-            for (Pair <String, String[]> vertic : question.vertics)
+            for (@SuppressWarnings("unused") Pair <String, String[]> vertic : question.vertics)
                 questionsout.write(" & \\mycircle");
             questionsout.write("\\\\"+TextUtils.LineSep);
         }

@@ -1,14 +1,8 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
-import java.awt.FileDialog;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Vector;
-import java.util.regex.Pattern;
-
 import org.javatuples.Pair;
-
-import uk.ac.mdx.RBornat.Saeedgenerator.Generator.ActionType;
 
 public class Questionnaire {
     final FBufferedReader qrein, testin;
@@ -169,6 +163,7 @@ public class Questionnaire {
     }
     
     /* this should check for uniqueness of codes */
+    @SuppressWarnings("unchecked") // applies to return statement
     Pair<String,String[]>[] readOptions(String[] items, String control, int maxlen) throws IOException {
         Vector<Pair<String,String[]>> optV = new Vector<Pair<String,String[]>>(3);
         String line;

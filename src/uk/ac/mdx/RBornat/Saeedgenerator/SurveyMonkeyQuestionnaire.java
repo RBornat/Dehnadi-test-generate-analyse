@@ -249,7 +249,7 @@ public class SurveyMonkeyQuestionnaire {
                String[] qLines = PaperQuestionnaire.questionLines(qu.progQuestions[qIdx]);
                Vector<String> choices = 
                        new Vector<String>(qu.answerPages[qIdx].choices.size());
-                String qid = Integer.toString(Utils.ordinal(qIdx));
+                // String qid = Integer.toString(Utils.ordinal(qIdx));
                 for (int cIdx = 0; cIdx<qu.answerPages[qIdx].choices.size(); cIdx++)
                     choices.add(qu.answerPages[qIdx].choices.item(cIdx).toString(" "));
                 choices.add(PaperQuestionnaire.stringOfOther(qu.progQuestions[qIdx]));

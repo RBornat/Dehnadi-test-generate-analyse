@@ -1,21 +1,14 @@
 package uk.ac.mdx.RBornat.Saeedgenerator;
 
-import java.awt.FileDialog;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Vector;
-
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.apache.commons.lang3.StringEscapeUtils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
